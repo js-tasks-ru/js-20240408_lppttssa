@@ -10,6 +10,5 @@ const compareStrings = (firstString, secondString) => {
  */
 
 export function sortStrings(arr, param = 'asc') {
-  return [...arr].sort((firstString, secondString) =>
-    param === 'asc' ? compareStrings(firstString, secondString) : compareStrings(secondString, firstString));
+  return [...arr].sort((firstString, secondString) => param === 'asc' ? compareStrings(firstString, secondString) : compareStrings(secondString, firstString));
 }
