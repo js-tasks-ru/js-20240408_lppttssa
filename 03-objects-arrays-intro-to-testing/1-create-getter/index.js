@@ -8,11 +8,16 @@ export function createGetter(path) {
 
   return function getter(obj) {
     if (Object.keys(obj).length === 0) {
-      return undefined;
+      return;
     }
 
     let currentObj = {...obj};
     keys.forEach(key => {
+      if (!Object.keys(currentObj).includes(key)) {
+        currentObj = undefined;
+        return;
+      }
+
       currentObj = currentObj[key];
     });
 
