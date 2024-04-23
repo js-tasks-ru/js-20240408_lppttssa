@@ -12,14 +12,14 @@ export function createGetter(path) {
     }
 
     let currentObj = {...obj};
-    keys.forEach(key => {
+    for (const key of keys) {
       if (!Object.keys(currentObj).includes(key)) {
         currentObj = undefined;
         return;
       }
 
       currentObj = currentObj[key];
-    });
+    }
 
     return currentObj;
   };
