@@ -33,19 +33,12 @@ export default class NotificationMessage {
     `;
   }
 
-  show(targetElement) {
+  show(targetElement = document.body) {
     if (NotificationMessage.lastShownComponent) {
       NotificationMessage.lastShownComponent.hide();
     }
 
-    let innerContent = this.element;
-
-    if (targetElement) {
-      innerContent = targetElement;
-      innerContent.append(this.element);
-    }
-
-    document.body.append(innerContent);
+    targetElement.append(this.element);
     NotificationMessage.lastShownComponent = this;
 
     this.timer = setTimeout(() => {
