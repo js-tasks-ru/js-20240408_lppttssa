@@ -74,15 +74,35 @@ export default class SortableTable {
   createBodyRowTemplate(rowData) {
     return `
       <a href="/products/${rowData.id}" class="sortable-table__row">
-        ${rowData.images && this.createBodyImageCellTemplate(rowData.images[0], rowData.title)}
-
-        ${rowData.title && `<div class="sortable-table__cell">${rowData.title}</div>`}
-
-        ${rowData.quantity && `<div class="sortable-table__cell">${rowData.quantity}</div>`}
-        ${rowData.price && `<div class="sortable-table__cell">${rowData.price}</div>`}
-        ${rowData.sales && `<div class="sortable-table__cell">${rowData.sales}</div>`}
+        ${this.createBodyRowCellsTemplate(rowData)}
       </a>
     `;
+  }
+
+  createBodyRowCellsTemplate(rowData) {
+    const bodyRowTemplate = [];
+
+    for (const headerItem of this.headerConfig) {
+      if (headerItem.id === 'images' && rowData.images) {
+        bodyRowTemplate.push(this.createBodyRowCellTemplate(rowData.images[0], true, rowData.title));
+      } else {
+        bodyRowTemplate.push(this.createBodyRowCellTemplate(rowData[headerItem.id]));
+      }
+    }
+
+    return bodyRowTemplate.join('');
+  }
+
+  createBodyRowCellTemplate(data, isImage = false, altData = '') {
+    if (data) {
+      if (isImage) {
+        return this.createBodyImageCellTemplate(data, altData);
+      }
+
+      return `<div class="sortable-table__cell">${data}</div>`;
+    }
+
+    return null;
   }
 
   createBodyImageCellTemplate(image, alt) {
