@@ -1,6 +1,6 @@
 import {sort} from "./utils.js";
 
-export default class SortableTable {
+export default class SortableTableV1 {
   element;
   subElements = {};
 
