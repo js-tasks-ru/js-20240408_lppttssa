@@ -1,4 +1,4 @@
-export default class ColumnChart {
+export default class ColumnChartV1 {
   element;
   chartHeight;
 
@@ -38,7 +38,7 @@ export default class ColumnChart {
       <div class="${this.getChartClasses()}" style="--chart-height: 50">
         <div class="column-chart__title">
           ${this.label}
-          ${this.link ? `<a href=${this.link} class="column-chart__link">View all</a>` : null}
+          ${this.link ? `<a href=${this.link} class="column-chart__link">View all</a>` : ''}
         </div>
         <div class="column-chart__container">
           <div data-element="header" class="column-chart__header">${this.formatHeading(this.value)}</div>
