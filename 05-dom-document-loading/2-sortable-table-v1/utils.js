@@ -1,6 +1,6 @@
 const compareStrings = (firstParam, secondParam, type) => {
   if (type === 'string') {
-    return firstParam.localeCompare(secondParam, 'ru', {caseFirst: "upper"});
+    return firstParam?.localeCompare(secondParam, 'ru', {caseFirst: "upper"});
   }
 
   return firstParam - secondParam;
