@@ -1,4 +1,5 @@
 import fetchJson from './utils/fetch-json.js';
+
 import {sort} from "../../05-dom-document-loading/2-sortable-table-v1/utils.js";
 
 import SortableTableV2 from "../../06-events-practice/1-sortable-table-v2/index.js";
