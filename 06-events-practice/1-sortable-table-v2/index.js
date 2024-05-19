@@ -25,17 +25,17 @@ class SortableTableV2 extends SortableTableV1 {
     }
   }
 
-  createHeaderCellTemplate = (cellData) => {
+  createHeaderCellTemplate(cellData) {
     const arrow = this.createSortArrowTemplate();
 
-    if (cellData.template) {
+    if (cellData.template && this.data.length) {
       return cellData.template(this.data);
     }
 
     return `
       <div class="sortable-table__cell" data-id="${cellData.id}" data-sortable="${cellData.sortable}">
         <span>${cellData.title}</span>
-        ${cellData.sortable ? arrow : null}
+        ${cellData.sortable ? arrow : ''}
       </div>
     `;
   }

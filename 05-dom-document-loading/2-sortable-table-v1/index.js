@@ -47,7 +47,7 @@ export default class SortableTableV1 {
     `;
   }
 
-  createHeaderCellTemplate = (cellData) => {
+  createHeaderCellTemplate(cellData) {
     if (cellData.template) {
       return cellData.template(this.data);
     }

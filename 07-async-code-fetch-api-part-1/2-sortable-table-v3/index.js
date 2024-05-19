@@ -20,9 +20,16 @@ export default class SortableTable extends SortableTableV2 {
 
     this.url = url;
 
-    window.addEventListener("scroll", this.handleInfiniteScroll);
+    this.updateData().then(() => {
+      this.updateHeader();
+      this.createListeners();
+    });
+  }
 
-    this.updateData();
+  createListeners() {
+    super.createListeners();
+
+    window.addEventListener("scroll", this.handleInfiniteScroll);
   }
 
   createLoaderTemplate() {
@@ -48,6 +55,18 @@ export default class SortableTable extends SortableTableV2 {
         ${this.createLoaderTemplate()}
       </div>
     `;
+  }
+
+  createHeaderTemplate() {
+    return `
+      <div data-element="header" class="sortable-table__header sortable-table__row">
+        ${this.createHeaderCellsTemplate()}
+      </div>
+    `;
+  }
+
+  createHeaderCellsTemplate() {
+    return this.headerConfig.map(cell => this.createHeaderCellTemplate(cell)).join('');
   }
 
   createURL(id, order) {
@@ -81,6 +100,10 @@ export default class SortableTable extends SortableTableV2 {
 
   updateBody() {
     this.subElements.body.innerHTML = this.data.length ? this.createBodyDataTemplate() : this.createEmptyTemplate();
+  }
+
+  updateHeader() {
+    this.subElements.header.innerHTML = this.createHeaderCellsTemplate();
   }
 
   toggleElementLoadingClass = () => {
