@@ -1,7 +1,7 @@
 import {sort} from "./utils.js";
 
 export default class SortableTableV1 {
-  element;
+  element = null;
   subElements = {};
 
   constructor(headerConfig = [], data = []) {
@@ -49,7 +49,7 @@ export default class SortableTableV1 {
 
   createHeaderCellTemplate(cellData) {
     if (cellData.template) {
-      return cellData.template();
+      return cellData.template(this.data);
     }
 
     return `

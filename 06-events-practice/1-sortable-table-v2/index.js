@@ -1,14 +1,15 @@
 import {sort} from "../../05-dom-document-loading/2-sortable-table-v1/utils.js";
 import SortableTableV1 from "../../05-dom-document-loading/2-sortable-table-v1/index.js";
 
-class SortableTable extends SortableTableV1 {
+class SortableTableV2 extends SortableTableV1 {
   currentSortFieldId = '';
   currentSortDirection = '';
 
   constructor(headerConfig, {
+    isSortLocally = true,
     data = [],
     sorted = {}
-  } = {}, isSortLocally = true) {
+  } = {}) {
     super(headerConfig, data);
 
     this.isSortLocally = isSortLocally;
@@ -27,14 +28,14 @@ class SortableTable extends SortableTableV1 {
   createHeaderCellTemplate(cellData) {
     const arrow = this.createSortArrowTemplate();
 
-    if (cellData.template) {
-      return cellData.template();
+    if (cellData.template && this.data.length) {
+      return cellData.template(this.data);
     }
 
     return `
       <div class="sortable-table__cell" data-id="${cellData.id}" data-sortable="${cellData.sortable}">
         <span>${cellData.title}</span>
-        ${cellData.sortable ? arrow : null}
+        ${cellData.sortable ? arrow : ''}
       </div>
     `;
   }
@@ -100,4 +101,4 @@ class SortableTable extends SortableTableV1 {
   }
 }
 
-export default SortableTable;
+export default SortableTableV2;
