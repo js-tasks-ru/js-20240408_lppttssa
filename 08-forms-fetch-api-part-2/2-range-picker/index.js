@@ -280,6 +280,7 @@ export default class RangePicker {
 
     if (this.from && this.to) {
       this.updateInputs();
+      this.element.dispatchEvent(new CustomEvent('date-select', {from: this.from, to: this.to}));
     }
   };
 
@@ -287,11 +288,26 @@ export default class RangePicker {
     this.subElements.input.addEventListener('click', this.handleSelectorOpen);
   }
 
+  removeListeners() {
+    this.controls = this.getControls();
+    for (const control of this.controls) {
+      control.removeEventListener('click', this.handleChangeMonths);
+    }
+
+    const buttons = this.element.querySelectorAll('#button');
+    for (const button of buttons) {
+      button.removeEventListener('click', this.handleDateChoose);
+    }
+
+    this.subElements.input.removeEventListener('click', this.handleSelectorOpen);
+  }
+
   remove() {
     this.element.remove();
   }
 
   destroy() {
+    this.removeListeners();
     this.remove();
   }
 }
