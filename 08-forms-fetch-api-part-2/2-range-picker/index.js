@@ -261,17 +261,11 @@ export default class RangePicker {
   handleDateChoose = (event) => {
     const newDate = event.target.getAttribute(['data-value']);
 
-    if (this.from && this.to) {
+    if (this.from && this.to || !this.from || this.from > new Date(newDate)) {
       this.from = new Date(newDate);
       this.to = null;
-    }
-
-    if (this.from && !this.to || !this.from) {
-      if (this.from >= new Date(newDate) || !this.from) {
-        this.from = new Date(newDate);
-      } else {
-        this.to = new Date(newDate);
-      }
+    } else {
+      this.to = new Date(newDate);
     }
 
     this.updateSelectorContent();
