@@ -254,8 +254,10 @@ describe('forms-fetch-api-part-2/range-picker', () => {
     const [firstCalendar] = selector.querySelectorAll('.rangepicker__calendar');
     const firstDateGrid = firstCalendar.querySelector('.rangepicker__date-grid');
     const firstDate = firstDateGrid.firstElementChild;
+
     // change "from" date
     firstDate.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
     const rightNavigation = rangePicker.element.querySelector('.rangepicker__selector-control-right');
 
     // got to the next couple of months
