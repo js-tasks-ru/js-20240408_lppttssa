@@ -146,7 +146,7 @@ export default class RangePicker {
   }
 
   createMonthTemplate(date) {
-    const month = date.toLocaleString('ru', { month: 'long' });
+    const month = date.toLocaleString('ru', {month: 'long'});
 
     return `<time datetime="${month}">${month}</time>`;
   }
@@ -157,8 +157,12 @@ export default class RangePicker {
     return dates.map(date => this.createSelectorDateTemplate(date)).join('');
   }
 
-  createSelectorDateTemplate(date) {
-    return `<button id="button" type="button" class="${this.getSelectorDateClasses(date)}" data-value="${date}">${date.getDate()}</button>`;
+  createSelectorDateTemplate(date, isFirst = false) {
+    const style = isFirst ? '--start-from: 5' : '';
+
+    return `
+        <button id="button" type="button" class="${this.getSelectorDateClasses(date)}" data-value="${date}" style="${style}">${date.getDate()}</button>
+    `;
   }
 
   updateInputs() {
@@ -175,11 +179,11 @@ export default class RangePicker {
     monthsDates[1].innerHTML = this.createDateGridContent(this.endDate);
 
     this.createButtonsListeners();
-  }
+  };
 
   isDatesEqual = (firstDate, secondDate) => {
     return firstDate?.getTime() === secondDate?.getTime();
-  }
+  };
 
   isDateBetween = (date) => {
     return date > this.from && date < this.to;
@@ -248,7 +252,7 @@ export default class RangePicker {
     }
 
     this.updateSelector();
-  }
+  };
 
   handleSelectorOpen = () => {
     this.isOpened = !this.isOpened;
@@ -273,7 +277,7 @@ export default class RangePicker {
     if (this.from && this.to) {
       this.updateInputs();
     }
-  }
+  };
 
   createListeners() {
     this.subElements.input.addEventListener('click', this.handleSelectorOpen);
