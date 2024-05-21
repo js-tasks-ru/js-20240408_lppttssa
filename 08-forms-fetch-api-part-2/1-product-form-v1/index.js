@@ -46,7 +46,7 @@ export default class ProductForm {
 
           <div class="form-group form-group__wide">
             ${this.createLabelTemplate('Описание')}
-            <textarea id="description" required="" class="form-control" name="description" data-element="productDescription" placeholder="Описание товара">${this.data.description}</textarea>
+            <textarea id="description" required="" class="form-control" name="description" data-element="productDescription" placeholder="Описание товара">${escapeHtml(this.data.description)}</textarea>
           </div>
 
           <div class="form-group form-group__wide" data-element="sortable-list-container">

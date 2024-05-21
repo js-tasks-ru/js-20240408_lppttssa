@@ -154,16 +154,20 @@ export default class RangePicker {
   createDateGridContent(date = this.startDate) {
     const dates = this.getAllMonthDates(date.getMonth(), date.getFullYear());
 
-    return dates.map(date => this.createSelectorDateTemplate(date)).join('');
+    return dates.map((date, index) => this.createSelectorDateTemplate(date, index === 0)).join('');
   }
 
   createSelectorDateTemplate(date, isFirst = false) {
-    const style = isFirst ? '--start-from: 5' : '';
+    const style = isFirst ? `--start-from: ${this.getDayShift(date)}` : '';
 
     return `
         <button id="button" type="button" class="${this.getSelectorDateClasses(date)}" data-value="${date}" style="${style}">${date.getDate()}</button>
     `;
   }
+
+  getDayShift = (date) => {
+    return date.getDay();
+  };
 
   updateInputs() {
     this.subElements.input.innerHTML = this.createInputContentTemplate();
