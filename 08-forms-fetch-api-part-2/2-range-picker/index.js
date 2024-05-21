@@ -162,6 +162,10 @@ export default class RangePicker {
   }
 
   updateSelector = () => {
+    const months = this.element.querySelectorAll('.rangepicker__month-indicator');
+    months[0].innerHTML = this.createMonthTemplate(this.startDate);
+    months[1].innerHTML = this.createMonthTemplate(this.endDate);
+
     this.element.querySelector('.rangepicker__selector-arrow').innerHTML = this.createSelectorInnerContentTemplate();
   }
 
