@@ -64,14 +64,18 @@ export default class RangePicker {
 
     this.isInitialRender = false;
 
-    const buttons = this.element.querySelectorAll('#button');
-    for (const button of buttons) {
-      button.addEventListener('click', this.handleDateChoose);
-    }
+    this.createButtonsListeners();
 
     this.controls = this.getControls();
     for (const control of this.controls) {
       control.addEventListener('click', this.handleChangeMonths);
+    }
+  }
+
+  createButtonsListeners() {
+    const buttons = this.element.querySelectorAll('#button');
+    for (const button of buttons) {
+      button.addEventListener('click', this.handleDateChoose);
     }
   }
 
@@ -134,16 +138,16 @@ export default class RangePicker {
   }
 
   createMonthIndicatorTemplate(date = this.startDate) {
-    const month = date.toLocaleString('ru', { month: 'long' });
-
     return `
       <div class="rangepicker__month-indicator">
-        ${this.createMonthTemplate(month)}
+        ${this.createMonthTemplate(date)}
       </div>
     `;
   }
 
-  createMonthTemplate(month) {
+  createMonthTemplate(date) {
+    const month = date.toLocaleString('ru', { month: 'long' });
+
     return `<time datetime="${month}">${month}</time>`;
   }
 
@@ -166,7 +170,11 @@ export default class RangePicker {
     months[0].innerHTML = this.createMonthTemplate(this.startDate);
     months[1].innerHTML = this.createMonthTemplate(this.endDate);
 
-    this.element.querySelector('.rangepicker__selector-arrow').innerHTML = this.createSelectorInnerContentTemplate();
+    const monthsDates = this.element.querySelectorAll('.rangepicker__date-grid');
+    monthsDates[0].innerHTML = this.createDateGridContent();
+    monthsDates[1].innerHTML = this.createDateGridContent(this.endDate);
+
+    this.createButtonsListeners();
   }
 
   isDatesEqual = (firstDate, secondDate) => {

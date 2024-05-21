@@ -244,7 +244,6 @@ describe('forms-fetch-api-part-2/range-picker', () => {
 
   it('should have ability to select dates range bigger than two months', () => {
     const input = rangePicker.element.querySelector('.rangepicker__input');
-    console.log(rangePicker.from)
     const selector = rangePicker.element.querySelector('.rangepicker__selector');
 
     // open date picker
@@ -255,11 +254,8 @@ describe('forms-fetch-api-part-2/range-picker', () => {
     const [firstCalendar] = selector.querySelectorAll('.rangepicker__calendar');
     const firstDateGrid = firstCalendar.querySelector('.rangepicker__date-grid');
     const firstDate = firstDateGrid.firstElementChild;
-    console.log(rangePicker.from)
     // change "from" date
     firstDate.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-    console.log(rangePicker.from)
-
     const rightNavigation = rangePicker.element.querySelector('.rangepicker__selector-control-right');
 
     // got to the next couple of months
