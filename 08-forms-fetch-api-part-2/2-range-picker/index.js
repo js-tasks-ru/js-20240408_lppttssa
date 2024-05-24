@@ -73,7 +73,7 @@ export default class RangePicker {
   }
 
   createButtonsListeners() {
-    const buttons = this.element.querySelectorAll('#button');
+    const buttons = this.element.querySelectorAll('[data-button]');
     for (const button of buttons) {
       button.addEventListener('click', this.handleDateChoose);
     }
@@ -161,7 +161,7 @@ export default class RangePicker {
     const style = isFirst ? `--start-from: ${this.getDayShift(date)}` : '';
 
     return `
-        <button id="button" type="button" class="${this.getSelectorDateClasses(date)}" data-value="${date}" style="${style}">${date.getDate()}</button>
+        <button data-button type="button" class="${this.getSelectorDateClasses(date)}" data-value="${date}" style="${style}">${date.getDate()}</button>
     `;
   }
 
@@ -294,7 +294,7 @@ export default class RangePicker {
       control.removeEventListener('click', this.handleChangeMonths);
     }
 
-    const buttons = this.element.querySelectorAll('#button');
+    const buttons = this.element.querySelectorAll('[data-button]');
     for (const button of buttons) {
       button.removeEventListener('click', this.handleDateChoose);
     }
