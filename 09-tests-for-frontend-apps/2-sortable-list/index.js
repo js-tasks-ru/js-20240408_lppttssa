@@ -34,13 +34,17 @@ export default class SortableList {
     return placeholder;
   };
 
+  getElementParent = (element) => {
+    return element.closest('li');
+  };
+
   handleMoveAt = (event, shiftX, shiftY) => {
     this.currentDroppable.style.left = event.pageX - shiftX + 'px';
     this.currentDroppable.style.top = event.pageY - shiftY + 'px';
   };
 
   handleCardSelect = (event) => {
-    this.currentDroppable = event.target.parentElement;
+    this.currentDroppable = this.getElementParent(event.target);
     const placeholder = this.createPlaceholder(this.currentDroppable.offsetHeight);
 
     const {left, top} = this.currentDroppable.getBoundingClientRect();
@@ -95,7 +99,7 @@ export default class SortableList {
   };
 
   handleDelete = (event) => {
-    const id = event.target.parentElement.id;
+    const id = this.getElementParent(event.target).id;
     this.items.filter(item => item.id !== id);
 
     const itemToDelete = this.element.querySelector(`#${id}`);
