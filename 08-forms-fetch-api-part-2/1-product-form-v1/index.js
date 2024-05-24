@@ -4,7 +4,7 @@ import fetchJson from './utils/fetch-json.js';
 const IMGUR_CLIENT_ID = '28aaa2e823b03b1';
 const BACKEND_URL = 'https://course-js.javascript.ru';
 
-export default class ProductForm {
+export default class ProductFormV1 {
   element = null;
   subElements;
 
@@ -46,7 +46,7 @@ export default class ProductForm {
 
           <div class="form-group form-group__wide">
             ${this.createLabelTemplate('Описание')}
-            <textarea id="description" required="" class="form-control" name="description" data-element="productDescription" placeholder="Описание товара">${this.data.description}</textarea>
+            <textarea id="description" required="" class="form-control" name="description" data-element="productDescription" placeholder="Описание товара">${escapeHtml(this.data.description)}</textarea>
           </div>
 
           <div class="form-group form-group__wide" data-element="sortable-list-container">
